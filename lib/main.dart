@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   final List<Transaction> transactions = [
     Transaction(
-        id: 't1', title: 'new shoes', amount: 6.99, date: DateTime.now()),
+        id: 't1', title: 'new shoes', amount: 26.99, date: DateTime.now()),
     Transaction(
         id: 't2', title: 'new bike', amount: 23.99, date: DateTime.now()),
   ];
@@ -45,9 +45,49 @@ class MyHomePage extends StatelessWidget {
               child: Text('CHART'),
             ),
           ),
-          Card(
-            color: Colors.red,
-            child: Text('list of Tx'),
+          Column(
+            children: transactions.map((tx) {
+              return Card(
+                  child: Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    child: Text(
+                      tx.amount.toString(),
+
+                      ///--------amount
+                      style: TextStyle(
+                          color: Colors.purple,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 2.0),
+                    ),
+                    padding: EdgeInsets.all(10),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        tx.title,
+                        style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15),
+                      ),
+                      Text(
+                        tx.date.toString(),
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 10),
+                      ),
+                    ],
+                  )
+                ],
+              ));
+            }).toList(),
           )
         ],
       ),
